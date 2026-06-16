@@ -1,0 +1,75 @@
+create table customers(
+customer_id int primary key,
+customer_name varchar,
+city varchar
+)
+
+create table orders(
+order_id int primary key,
+customer_id int,
+amount int
+)
+
+insert into customers values
+(1,'Arun','Chennai'),
+(2,'Priya','Madurai'),
+(3,'Karthik','Coimbatore')
+
+insert into orders values
+(101,1,4500),
+(102,2,7500),
+(103,3,6000),
+(104,1,9000)
+
+select
+o.order_id,
+c.customer_name,
+c.city,
+o.amount
+from orders o, customers c
+where o.customer_id=c.customer_id
+and o.amount>5000
+
+
+create table departments(
+dept_id int primary key,
+dept_name varchar
+)
+
+create table employees(
+emp_id int primary key,
+emp_name varchar,
+dept_id int,
+salary int
+)
+
+insert into departments values
+(1,'HR'),
+(2,'IT'),
+(3,'Finance')
+
+insert into employees values
+(1,'Ravi',1,35000),
+(2,'Meena',2,45000),
+(3,'Suresh',1,28000),
+(4,'Divya',1,50000)
+
+select
+e.emp_name,
+d.dept_name,
+e.salary
+from employees e, departments d
+where e.dept_id=d.dept_id
+and e.salary>30000
+and d.dept_name='HR'
+
+
+select
+order_id,
+customer_id,
+amount
+from orders
+where amount>(
+select avg(amount)
+from orders
+)
